@@ -1,0 +1,24 @@
+[package]
+name = "cybersentinel"
+version = "0.6.0"
+description = "Boîte à outils de cybersécurité locale et respectueuse de la vie privée"
+authors = ["CyberSentinel contributors"]
+license = "MIT"
+repository = "https://github.com/ccrismel-beep/cybersentinel"
+edition = "2024"
+rust-version = "1.90"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "cybersentinel_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.7.1" }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+tauri = { version = "2.12.1" }
+tauri-plugin-opener = "2"
