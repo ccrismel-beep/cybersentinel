@@ -1,0 +1,38 @@
+name: Signaler un problème
+description: Décrire un comportement incorrect ou inattendu
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Merci de ne jamais joindre de mot de passe, fichier confidentiel ou donnée personnelle.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Que s’est-il passé et quel résultat attendiez-vous ?
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Plateforme
+      options:
+        - Application web
+        - Windows
+        - Linux
+        - Autre
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version de CyberSentinel
+      placeholder: Exemple : 0.6.0
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+      description: Indiquez une suite d’étapes courte et sans donnée sensible.
+    validations:
+      required: true
