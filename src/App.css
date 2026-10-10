@@ -1,0 +1,472 @@
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 7%;
+  border-bottom: 1px solid #24334d;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: #4da3ff;
+}
+
+.version {
+  color: #a6b8d0;
+}
+
+.main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  flex: 1;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 0;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: #a6b8d0;
+  font-size: 18px;
+}
+
+.tools h2 {
+  margin-bottom: 30px;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.tool-card {
+  background: #111d33;
+  border: 1px solid #263a58;
+  border-radius: 14px;
+  padding: 30px;
+  text-align: left;
+  color: inherit;
+  transition: 0.2s;
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  border-color: #4da3ff;
+  background: #172744;
+}
+
+.tool-card:focus-visible {
+  outline: 3px solid #4da3ff;
+  outline-offset: 3px;
+}
+
+.tool-icon {
+  font-size: 36px;
+}
+
+.tool-card h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.tool-card p {
+  color: #a6b8d0;
+  line-height: 1.6;
+}
+
+.tool-action {
+  display: inline-block;
+  margin-top: 16px;
+  color: #4da3ff;
+  font-weight: bold;
+}
+
+.selection {
+  margin-top: 35px;
+  padding: 25px;
+  background: #111d33;
+  border: 1px solid #263a58;
+  border-radius: 14px;
+}
+
+.selection button {
+  padding: 10px 20px;
+  background: #4da3ff;
+  border: none;
+  border-radius: 8px;
+  color: #08101f;
+}
+
+footer {
+  padding: 25px;
+  text-align: center;
+  color: #a6b8d0;
+  border-top: 1px solid #24334d;
+}
+
+@media (max-width: 768px) {
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    padding: 20px;
+  }
+}
+
+/* SecurePass */
+
+.secure-pass {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.secure-pass h2 {
+  color: #4da3ff;
+  margin-bottom: 0;
+}
+
+.secure-pass p {
+  color: #a6b8d0;
+  line-height: 1.6;
+}
+
+.password-result {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.password-result input {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px;
+  border: 1px solid #344b6e;
+  border-radius: 8px;
+  background: #080f1e;
+  color: #ffffff;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.password-result button,
+.generate-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #4da3ff;
+  color: #08101f;
+  font-weight: bold;
+}
+
+.password-result button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.password-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: #0c1729;
+  border-radius: 10px;
+}
+
+.password-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.password-options input[type="range"] {
+  width: 100%;
+  accent-color: #4da3ff;
+}
+
+.password-options input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4da3ff;
+}
+
+.secure-pass .privacy-note {
+  font-size: 13px;
+  color: #8fa6c4;
+}
+
+/* Analyseur de mots de passe */
+
+.tool-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #344b6e;
+  margin: 25px 0;
+}
+
+.password-analyzer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.password-analyzer h3 {
+  color: #4da3ff;
+  font-size: 22px;
+}
+
+.analysis-result {
+  padding: 20px;
+  background: #0c1729;
+  border-radius: 10px;
+}
+
+.strength-track {
+  height: 12px;
+  background: #263a58;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.2s ease;
+}
+
+/* =========================================
+   LINKCHECK — TABLEAU DE BORD
+   ========================================= */
+
+.link-check {
+  width: 100%;
+  text-align: left;
+}
+
+.link-check h2 {
+  margin-bottom: 12px;
+}
+
+.link-check .password-result {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.link-check .password-result input {
+  flex: 1;
+  min-width: 0;
+}
+
+.link-check .analysis-result {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  background: #0f172a;
+}
+
+.link-check .analysis-result h3 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #f8fafc;
+}
+
+.link-check .analysis-result h4 {
+  margin-top: 22px;
+  margin-bottom: 12px;
+  color: #e2e8f0;
+}
+
+.link-check .analysis-result ul {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+
+.link-check .analysis-result li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.link-check .analysis-result strong {
+  overflow-wrap: anywhere;
+}
+
+.link-check .privacy-note {
+  margin-top: 20px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+@media (max-width: 600px) {
+  .link-check .password-result {
+    flex-direction: column;
+  }
+
+  .link-check .analysis-result {
+    padding: 16px;
+  }
+}
+
+/* =========================================
+   LINKCHECK — JAUGE DE VIGILANCE
+   ========================================= */
+
+.link-risk-track {
+  width: 100%;
+  height: 12px;
+  margin: 14px 0 8px;
+  background: #334155;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.link-risk-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease,
+              background-color 0.4s ease;
+}
+
+.link-risk-caption {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+/* Annuaire de ressources */
+
+.resource-directory {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.resource-directory h2 {
+  color: #4da3ff;
+  margin-bottom: 0;
+}
+
+.resource-directory > p {
+  color: #a6b8d0;
+  line-height: 1.6;
+}
+
+.resource-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(200px, 1fr);
+  gap: 10px 16px;
+  padding: 20px;
+  background: #0c1729;
+  border-radius: 10px;
+}
+
+.resource-filters label {
+  color: #dbeafe;
+  font-weight: 700;
+}
+
+.resource-filters input,
+.resource-filters select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #344b6e;
+  border-radius: 8px;
+  background: #080f1e;
+  color: #ffffff;
+}
+
+.resource-count {
+  font-size: 0.9rem;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  background: #0f172a;
+}
+
+.resource-card h3,
+.resource-card p {
+  margin: 0;
+}
+
+.resource-card h3 {
+  color: #f8fafc;
+}
+
+.resource-card p {
+  color: #cbd5e1;
+  line-height: 1.55;
+}
+
+.resource-card .resource-category {
+  align-self: flex-start;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #1e3a5f;
+  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.resource-card .resource-caution {
+  color: #facc15;
+  font-size: 0.86rem;
+}
+
+.resource-card a {
+  margin-top: auto;
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+.resource-card a:focus-visible {
+  outline: 3px solid #4da3ff;
+  outline-offset: 4px;
+}
+
+.resource-empty {
+  padding: 20px;
+  border: 1px dashed #475569;
+  border-radius: 10px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .resource-filters {
+    grid-template-columns: 1fr;
+  }
+}
