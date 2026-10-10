@@ -15,7 +15,7 @@ Les trois outils d’analyse fonctionnent dans le navigateur, sur l’appareil d
 
 Consultez [docs/privacy.md](docs/privacy.md) pour le détail.
 
-## Installation pour le développement
+## Installation web pour le développement
 
 Prérequis : Node.js 20.19 ou une version plus récente compatible avec Vite 8.
 
@@ -35,9 +35,25 @@ npm run lint
 npm run build
 ```
 
+## Application de bureau
+
+CyberSentinel intègre Tauri 2. Après installation des [prérequis Tauri pour Windows](https://v2.tauri.app/start/prerequisites/), lancez :
+
+```bash
+npm run tauri:dev
+```
+
+Pour construire les installateurs compatibles avec votre système :
+
+```bash
+npm run tauri:build
+```
+
+Le workflow GitHub `release.yml` peut aussi produire les installateurs Windows et Linux dans un brouillon de version, sans clé API et sans secret supplémentaire.
+
 ## État du projet
 
-La version 0.5 est une application web locale. La transformation en application de bureau installable avec Tauri est prévue dans une étape ultérieure.
+La version 0.6 ajoute la couche bureau Tauri 2, des permissions minimales pour ouvrir les ressources dans le navigateur par défaut et les workflows de vérification et de construction des installateurs.
 
 ## Contribuer et signaler un problème
 

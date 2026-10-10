@@ -1,7 +1,7 @@
 {
   "name": "cybersentinel",
   "private": true,
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Boîte à outils de cybersécurité locale, gratuite et respectueuse de la vie privée.",
   "license": "MIT",
   "repository": {
@@ -17,9 +17,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
   },
   "dependencies": {
+    "@tauri-apps/plugin-opener": "^2.7.0",
     "@zxcvbn-ts/core": "^3.0.4",
     "@zxcvbn-ts/language-common": "^3.0.4",
     "hash-wasm": "^4.12.0",
@@ -27,6 +31,7 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.12.1",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",

@@ -1,5 +1,12 @@
 # Historique des versions
 
+## 0.6.0 — 2026-10-10
+
+- Ajout de l’application de bureau Tauri 2 pour Windows et Linux.
+- Ouverture explicite des ressources externes dans le navigateur par défaut avec une permission limitée.
+- Ajout d’une intégration continue pour vérifier le code web.
+- Ajout d’un workflow manuel qui construit des installateurs dans un brouillon de version GitHub.
+
 ## 0.5.0 — 2026-10-10
 
 - Ajout d’un annuaire de ressources de cybersécurité avec recherche et catégories.
