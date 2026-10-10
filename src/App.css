@@ -447,13 +447,23 @@ footer {
   font-size: 0.86rem;
 }
 
-.resource-card a {
+.resource-card .resource-link {
   margin-top: auto;
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #60a5fa;
   font-weight: 700;
+  cursor: pointer;
 }
 
-.resource-card a:focus-visible {
+.resource-card .resource-link:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+.resource-card .resource-link:focus-visible {
   outline: 3px solid #4da3ff;
   outline-offset: 4px;
 }

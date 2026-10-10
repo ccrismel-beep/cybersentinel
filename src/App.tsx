@@ -40,7 +40,7 @@ function App() {
     <div className="app">
       <header className="header">
         <div className="logo">🛡️ CyberSentinel</div>
-        <span className="version">Version 0.5</span>
+        <span className="version">Version 0.6</span>
       </header>
 
       <main className="main">
