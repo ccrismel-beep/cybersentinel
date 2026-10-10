@@ -218,66 +218,67 @@ function LinkCheck() {
           : '#22c55e'
 
   return (
-    <section className="link-check">
-      <h2>🔗 LinkCheck</h2>
+    <section className="link-check tool-workspace" aria-label="Espace LinkCheck">
+      <article className="workspace-panel">
+        <header className="panel-heading">
+          <span className="eyebrow">Inspection d’adresse</span>
+          <h2>Analyser un lien sans l’ouvrir</h2>
+          <p>
+            LinkCheck recherche localement certains indices techniques dans
+            le texte de l’adresse.
+          </p>
+        </header>
 
-      <p>
-        Recherchez certains indices suspects dans
-        une adresse Internet, sans ouvrir le lien.
-      </p>
+        <label className="field-label" htmlFor="link-to-analyze">
+          Adresse Internet à analyser
+        </label>
+        <div className="input-action-row">
+          <input
+            id="link-to-analyze"
+            type="text"
+            value={url}
+            onChange={e => {
+              setUrl(e.target.value)
+              setAnalysis(null)
+              setError('')
+              setCopyMessage('')
+            }}
+            placeholder="https://example.com"
+            spellCheck={false}
+            autoComplete="off"
+          />
 
-      <div className="password-result">
-        <input
-          type="text"
-          value={url}
-          onChange={e => {
-            setUrl(e.target.value)
-            setAnalysis(null)
-            setError('')
-            setCopyMessage('')
-          }}
-          placeholder="https://example.com"
-          aria-label="Adresse Internet à analyser"
-          spellCheck={false}
-          autoComplete="off"
-        />
+          <button type="button" onClick={analyzeLink}>
+            Analyser
+          </button>
+        </div>
 
-        <button
-          type="button"
-          onClick={analyzeLink}
-        >
-          Analyser
-        </button>
-      </div>
-
-      {error && (
-        <p role="alert" style={{ color: '#ef4444' }}>
-          {error}
-        </p>
-      )}
+        {error && (
+          <p className="status-message status-message--error" role="alert">
+            {error}
+          </p>
+        )}
+      </article>
 
       {analysis && (
-        <div className="analysis-result">
-          <h3>Résultat de l'analyse</h3>
+        <article className="analysis-result">
+          <header className="panel-heading">
+            <span className="eyebrow">Diagnostic local</span>
+            <h3>Résultat de l'analyse</h3>
+          </header>
 
-          <div className="link-report-actions">
-            <button
-              type="button"
-              onClick={copyReport}
-            >
+          <div className="report-actions">
+            <button type="button" onClick={copyReport}>
               📋 Copier le rapport
             </button>
 
-            <button
-              type="button"
-              onClick={downloadReport}
-            >
+            <button type="button" onClick={downloadReport}>
               📥 Télécharger le rapport (.txt)
             </button>
           </div>
 
           {copyMessage && (
-            <p role="status" aria-live="polite">
+            <p className="status-message status-message--success" role="status" aria-live="polite">
               {copyMessage}
             </p>
           )}
@@ -352,20 +353,22 @@ function LinkCheck() {
             </>
           )}
 
-          <p className="privacy-note">
-            Cette analyse ne consulte aucune base
-            de réputation et ne vérifie pas la
-            destination finale des redirections.
-            Elle ne garantit jamais qu'un lien est sûr.
-          </p>
-        </div>
+          <div className="privacy-stack">
+            <p className="privacy-note">
+              Cette analyse ne consulte aucune base de réputation et ne
+              vérifie pas la destination finale des redirections. Elle ne
+              garantit jamais qu'un lien est sûr.
+            </p>
+          </div>
+        </article>
       )}
 
-      <p className="privacy-note">
-        🔒 Analyse locale : le lien n'est pas ouvert
-        automatiquement et n'est pas transmis à un
-        service externe par cet outil.
-      </p>
+      <div className="privacy-stack">
+        <p className="privacy-note">
+          🔒 Analyse locale : le lien n'est pas ouvert automatiquement et
+          n'est pas transmis à un service externe par cet outil.
+        </p>
+      </div>
     </section>
   )
 }

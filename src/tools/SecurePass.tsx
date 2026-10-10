@@ -95,128 +95,132 @@ function SecurePass() {
   }
 
   return (
-    <section className="secure-pass">
-      <h2>🔐 SecurePass</h2>
+    <section className="secure-pass tool-workspace" aria-label="Espace SecurePass">
+      <div className="workspace-grid">
+        <article className="workspace-panel">
+          <header className="panel-heading">
+            <span className="eyebrow">Générateur local</span>
+            <h2>Créer un mot de passe</h2>
+            <p>
+              Configurez les caractères autorisés puis générez une valeur
+              aléatoire directement sur cet appareil.
+            </p>
+          </header>
 
-      <p>
-        Générez des mots de passe robustes
-        et analysez leur sécurité.
-      </p>
+          <div className="password-result">
+            <input
+              type={visible ? 'text' : 'password'}
+              value={password}
+              readOnly
+              aria-label="Mot de passe généré"
+              placeholder="Votre mot de passe apparaîtra ici"
+            />
 
-      {/* Résultat du générateur */}
-      <div className="password-result">
-        <input
-          type={visible ? 'text' : 'password'}
-          value={password}
-          readOnly
-          aria-label="Mot de passe généré"
-          placeholder="Votre mot de passe apparaîtra ici"
-        />
+            <button
+              type="button"
+              onClick={() => setVisible(!visible)}
+              disabled={!password}
+            >
+              {visible ? 'Masquer' : 'Afficher'}
+            </button>
 
-        <button
-          type="button"
-          onClick={() => setVisible(!visible)}
-          disabled={!password}
-        >
-          {visible ? 'Masquer' : 'Afficher'}
-        </button>
+            <button
+              type="button"
+              onClick={copyPassword}
+              disabled={!password}
+            >
+              Copier
+            </button>
+          </div>
 
-        <button
-          type="button"
-          onClick={copyPassword}
-          disabled={!password}
-        >
-          Copier
-        </button>
+          <fieldset className="password-options">
+            <legend>Paramètres de génération</legend>
+
+            <label htmlFor="password-length">
+              Longueur : {length} caractères
+            </label>
+
+            <input
+              id="password-length"
+              type="range"
+              min="12"
+              max="64"
+              value={length}
+              onChange={e => setLength(Number(e.target.value))}
+            />
+
+            <label>
+              <input
+                type="checkbox"
+                checked={upper}
+                onChange={e => setUpper(e.target.checked)}
+              />
+              Majuscules (A-Z)
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={lower}
+                onChange={e => setLower(e.target.checked)}
+              />
+              Minuscules (a-z)
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={digits}
+                onChange={e => setDigits(e.target.checked)}
+              />
+              Chiffres (0-9)
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={symbols}
+                onChange={e => setSymbols(e.target.checked)}
+              />
+              Symboles (!@#$...)
+            </label>
+          </fieldset>
+
+          <button
+            type="button"
+            className="generate-button"
+            onClick={generatePassword}
+          >
+            Générer un mot de passe
+          </button>
+
+          {message && (
+            <p
+              className={`status-message ${
+                message.startsWith('Mot')
+                  ? 'status-message--success'
+                  : 'status-message--error'
+              }`}
+              role="status"
+              aria-live="polite"
+            >
+              {message}
+            </p>
+          )}
+
+          <div className="privacy-stack">
+            <p className="privacy-note">
+              🔒 La génération est effectuée localement. Aucun mot de passe
+              n'est envoyé à un serveur par cet outil. La copie utilise
+              temporairement le presse-papiers de votre ordinateur.
+            </p>
+          </div>
+        </article>
+
+        <article className="workspace-panel">
+          <PasswordAnalyzer />
+        </article>
       </div>
-
-      {/* Options du générateur */}
-      <div className="password-options">
-        <label htmlFor="password-length">
-          Longueur : {length} caractères
-        </label>
-
-        <input
-          id="password-length"
-          type="range"
-          min="12"
-          max="64"
-          value={length}
-          onChange={e =>
-            setLength(Number(e.target.value))
-          }
-        />
-
-        <label>
-          <input
-            type="checkbox"
-            checked={upper}
-            onChange={e =>
-              setUpper(e.target.checked)
-            }
-          />
-          Majuscules (A-Z)
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={lower}
-            onChange={e =>
-              setLower(e.target.checked)
-            }
-          />
-          Minuscules (a-z)
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={digits}
-            onChange={e =>
-              setDigits(e.target.checked)
-            }
-          />
-          Chiffres (0-9)
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={symbols}
-            onChange={e =>
-              setSymbols(e.target.checked)
-            }
-          />
-          Symboles (!@#$...)
-        </label>
-      </div>
-
-      {/* Bouton de génération */}
-      <button
-        type="button"
-        className="generate-button"
-        onClick={generatePassword}
-      >
-        Générer un mot de passe
-      </button>
-
-      <p role="status" aria-live="polite">
-        {message}
-      </p>
-
-      <p className="privacy-note">
-        🔒 La génération est effectuée localement.
-        Aucun mot de passe n'est envoyé à un serveur
-        par cet outil. La copie utilise temporairement
-        le presse-papiers de votre ordinateur.
-      </p>
-
-      {/* Séparation des deux outils */}
-      <hr className="tool-divider" />
-
-      {/* Analyseur temporairement désactivé */}
-      <PasswordAnalyzer />
     </section>
   )
 }

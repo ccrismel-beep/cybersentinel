@@ -48,13 +48,14 @@ function ResourceDirectory() {
   })
 
   return (
-    <section className="resource-directory">
-      <h2>🧭 Ressources de cybersécurité</h2>
-
-      <p>
-        Consultez une sélection de services officiels ou reconnus.
-        CyberSentinel n’envoie aucune donnée automatiquement.
-      </p>
+    <section className="resource-directory tool-workspace" aria-label="Annuaire de ressources">
+      <div className="resource-external-notice">
+        <span aria-hidden="true">↗</span>
+        <span>
+          Ces ressources sont des services externes. CyberSentinel ouvre leur
+          site uniquement lorsque vous activez le bouton correspondant.
+        </span>
+      </div>
 
       <div className="resource-filters">
         <label htmlFor="resource-search">
@@ -123,12 +124,14 @@ function ResourceDirectory() {
         </p>
       )}
 
-      <p className="privacy-note">
-        🔒 Un service externe reçoit des informations uniquement lorsque
-        vous ouvrez son site et utilisez ses fonctions. Consultez sa
-        politique de confidentialité avant de transmettre une adresse,
-        un lien ou un fichier.
-      </p>
+      <div className="privacy-stack">
+        <p className="privacy-note">
+          🔒 Un service externe reçoit des informations uniquement lorsque
+          vous ouvrez son site et utilisez ses fonctions. Consultez sa
+          politique de confidentialité avant de transmettre une adresse,
+          un lien ou un fichier.
+        </p>
+      </div>
     </section>
   )
 }

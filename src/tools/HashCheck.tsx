@@ -173,37 +173,30 @@ function HashCheck() {
   }
 
   return (
-    <section className="hash-check">
-      <h2>📁 HashCheck</h2>
+    <section className="hash-check tool-workspace" aria-label="Espace HashCheck">
+      <article className="workspace-panel hash-file-panel">
+        <header className="panel-heading">
+          <span className="eyebrow">Empreinte SHA-256</span>
+          <h2>Sélectionner un fichier</h2>
+          <p>
+            Les fichiers volumineux sont analysés progressivement, sans être
+            chargés entièrement en mémoire.
+          </p>
+        </header>
 
-      <p>
-        Calculez l'empreinte SHA-256 d'un fichier
-        et comparez-la à une empreinte de référence.
-      </p>
-
-      <p>
-        Les fichiers volumineux sont analysés
-        progressivement, sans être chargés
-        entièrement en mémoire.
-      </p>
-
-      {/* Sélection du fichier */}
-      <div className="password-options">
-        <label htmlFor="hash-file">
-          Sélectionner un fichier
-        </label>
-
-        <input
-          id="hash-file"
-          type="file"
-          onChange={handleFile}
-        />
-      </div>
+        <div className="password-options">
+          <label htmlFor="hash-file">Fichier à analyser</label>
+          <input id="hash-file" type="file" onChange={handleFile} />
+        </div>
+      </article>
 
       {/* Informations du fichier */}
       {fileName && (
-        <div className="analysis-result">
-          <h3>Informations du fichier</h3>
+        <article className="analysis-result">
+          <header className="panel-heading">
+            <span className="eyebrow">Diagnostic d’intégrité</span>
+            <h3>Informations du fichier</h3>
+          </header>
 
           <p>
             Nom : <strong>{fileName}</strong>
@@ -218,30 +211,21 @@ function HashCheck() {
 
           {/* Barre de progression */}
           {loading && (
-            <div style={{ marginTop: '20px' }}>
+            <div className="hash-progress-block">
               <h3>Calcul SHA-256 en cours</h3>
 
               <div
+                className="hash-progress-track"
                 role="progressbar"
                 aria-label="Progression du calcul SHA-256"
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={progress}
-                style={{
-                  width: '100%',
-                  height: '18px',
-                  backgroundColor: '#334155',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                }}
               >
                 <div
+                  className="hash-progress-fill"
                   style={{
                     width: `${progress}%`,
-                    height: '100%',
-                    backgroundColor: '#3b82f6',
-                    borderRadius: '10px',
-                    transition: 'width 0.15s ease',
                   }}
                 />
               </div>
@@ -253,11 +237,7 @@ function HashCheck() {
               <button
                 type="button"
                 onClick={cancelCalculation}
-                style={{
-                  backgroundColor: '#dc2626',
-                  color: '#ffffff',
-                  marginTop: '10px',
-                }}
+                className="danger-button"
               >
                 ✖ Annuler le calcul
               </button>
@@ -269,12 +249,7 @@ function HashCheck() {
             <>
               <h3>Empreinte SHA-256 calculée</h3>
 
-              <p
-                style={{
-                  overflowWrap: 'anywhere',
-                  fontFamily: 'monospace',
-                }}
-              >
+              <p className="hash-value">
                 {hash}
               </p>
 
@@ -287,16 +262,13 @@ function HashCheck() {
 
               {copyMessage && (
                 <p
+                  className={`status-message ${
+                    copyMessage.startsWith('Impossible')
+                      ? 'status-message--error'
+                      : 'status-message--success'
+                  }`}
                   role="status"
                   aria-live="polite"
-                  style={{
-                    color: copyMessage.startsWith(
-                      'Impossible'
-                    )
-                      ? '#ef4444'
-                      : '#22c55e',
-                    marginTop: '12px',
-                  }}
                 >
                   {copyMessage}
                 </p>
@@ -305,12 +277,13 @@ function HashCheck() {
               {/* Comparaison des empreintes */}
               <h3>Comparer les empreintes</h3>
 
-              <label htmlFor="reference-hash">
+              <label className="hash-reference-label" htmlFor="reference-hash">
                 Empreinte SHA-256 de référence
               </label>
 
               <textarea
                 id="reference-hash"
+                className="hash-reference"
                 value={referenceHash}
                 onChange={e =>
                   setReferenceHash(e.target.value)
@@ -318,41 +291,34 @@ function HashCheck() {
                 placeholder="Collez ici les 64 caractères de l'empreinte de référence"
                 rows={3}
                 spellCheck={false}
-                style={{
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  marginTop: '10px',
-                  padding: '12px',
-                  borderRadius: '8px',
-                  overflowWrap: 'anywhere',
-                }}
               />
 
               {normalizedReference !== '' && (
                 <div
+                  className={`comparison-status ${
+                    !referenceIsValid
+                      ? 'comparison-status--warning'
+                      : hashesMatch
+                        ? 'comparison-status--success'
+                        : 'comparison-status--error'
+                  }`}
                   role="status"
                   aria-live="polite"
-                  style={{
-                    marginTop: '16px',
-                    padding: '14px',
-                    borderRadius: '8px',
-                    backgroundColor: '#162235',
-                  }}
                 >
                   {!referenceIsValid ? (
-                    <p style={{ color: '#facc15' }}>
+                    <p>
                       ⚠️ Empreinte invalide :
                       saisissez exactement
                       64 caractères hexadécimaux.
                     </p>
                   ) : hashesMatch ? (
-                    <p style={{ color: '#22c55e' }}>
+                    <p>
                       ✅ Correspondance :
                       les empreintes SHA-256
                       sont identiques.
                     </p>
                   ) : (
-                    <p style={{ color: '#ef4444' }}>
+                    <p>
                       ❌ Différence détectée :
                       les empreintes SHA-256
                       ne correspondent pas.
@@ -362,36 +328,36 @@ function HashCheck() {
               )}
             </>
           )}
-        </div>
+        </article>
       )}
 
       {/* Messages d'erreur ou d'annulation */}
       {error && (
         <p
+          className={`status-message ${
+            error.startsWith('Calcul annulé')
+              ? 'status-message--warning'
+              : 'status-message--error'
+          }`}
           role="status"
-          style={{
-            color: error.startsWith('Calcul annulé')
-              ? '#facc15'
-              : '#ef4444',
-          }}
         >
           {error}
         </p>
       )}
 
       {/* Confidentialité */}
-      <p className="privacy-note">
-        🔒 Le calcul est effectué localement
-        dans votre navigateur. Aucun fichier
-        n'est envoyé à un serveur par cet outil.
-      </p>
+      <div className="privacy-stack">
+        <p className="privacy-note">
+          🔒 Le calcul est effectué localement dans votre navigateur. Aucun
+          fichier n'est envoyé à un serveur par cet outil.
+        </p>
 
-      <p className="privacy-note">
-        Une empreinte identique confirme uniquement
-        que le fichier correspond à la référence
-        fournie. Elle ne garantit pas l'absence
-        de logiciels malveillants.
-      </p>
+        <p className="privacy-note">
+          Une empreinte identique confirme uniquement que le fichier correspond
+          à la référence fournie. Elle ne garantit pas l'absence de logiciels
+          malveillants.
+        </p>
+      </div>
     </section>
   )
 }
