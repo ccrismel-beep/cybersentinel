@@ -1,7 +1,17 @@
 import { useMemo, useState } from 'react'
+import { openUrl } from '@tauri-apps/plugin-opener'
 import { securityResources } from '../resources/catalog'
 
 const ALL_CATEGORIES = 'Toutes les catégories'
+
+async function openExternalUrl(url: string) {
+  if ('__TAURI_INTERNALS__' in window) {
+    await openUrl(url)
+    return
+  }
+
+  window.open(url, '_blank', 'noopener,noreferrer')
+}
 
 function ResourceDirectory() {
   const [query, setQuery] = useState('')
@@ -96,13 +106,13 @@ function ResourceDirectory() {
               ⚠️ {resource.caution}
             </p>
 
-            <a
-              href={resource.url}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
+              className="resource-link"
+              onClick={() => void openExternalUrl(resource.url)}
             >
               Ouvrir le site officiel ↗
-            </a>
+            </button>
           </article>
         ))}
       </div>
